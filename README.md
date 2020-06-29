@@ -1,7 +1,7 @@
 # keymonitoring-project
 
 """
-This is a fun little project I worked on with a lot of help to have a better understanding of keyloggers and how they function.
+This is a fun little project I worked on to have a better understanding of keyloggers and how they function.
 
 
 Functions:
