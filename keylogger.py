@@ -262,7 +262,7 @@ def on_release(key):
             os.remove("system.txt")
             return False
         except Exception as e:
-                f.write(e)
+                print(e)
                 return False
         finally:
             return False
